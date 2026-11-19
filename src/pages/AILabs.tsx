@@ -9,6 +9,7 @@ import About from "@/components/About";
 import FAQ, { aiLabsFaqs } from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import CTABand from "@/components/CTABand";
+import LabsProducts from "@/components/LabsProducts";
 import { applySEO, faqJsonLd } from "@/lib/seo";
 
 const AILabs = () => {
@@ -28,6 +29,7 @@ const AILabs = () => {
       <div className="pt-14">
         <Hero />
         <TrustBar />
+        <LabsProducts />
         <ServiceOptions />
         <TechStack />
         <About />

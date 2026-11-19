@@ -14,6 +14,8 @@ import Privacy from "./pages/Privacy.tsx";
 import NoFixNoFee from "./pages/NoFixNoFee.tsx";
 import DataRecovery from "./pages/DataRecovery.tsx";
 import BusinessIT from "./pages/BusinessIT.tsx";
+import LabsProduct from "./pages/LabsProduct.tsx";
+import Founder from "./pages/Founder.tsx";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ const App = () => (
           <Route path="/bitlocker-recovery" element={<BitlockerRecovery />} />
           <Route path="/it-services" element={<ITServices />} />
           <Route path="/ai-labs" element={<AILabs />} />
+          <Route path="/ai-labs/:slug" element={<LabsProduct />} />
+          <Route path="/founder" element={<Founder />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/get-help" element={<GetHelpPage />} />
           <Route path="/privacy" element={<Privacy />} />

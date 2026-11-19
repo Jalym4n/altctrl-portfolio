@@ -42,10 +42,12 @@ const Footer = () => {
             <span className="text-[9px] tracking-[2px] uppercase" style={{ color: "hsl(40 90% 60%)" }}>◐ Beta</span>
           </div>
           <ul className="flex flex-col gap-2.5">
-            <li><a href="#ai-labs" className="text-xs text-dim hover:text-accent transition-colors">Overview</a></li>
-            <li><a href="#stack" className="text-xs text-dim hover:text-accent transition-colors">Tech stack</a></li>
-            <li><a href="#faq" className="text-xs text-dim hover:text-accent transition-colors">FAQ</a></li>
-            <li><a href="#contact" className="text-xs text-dim hover:text-accent transition-colors">Join waitlist</a></li>
+            <li><a href="/ai-labs" className="text-xs text-dim hover:text-accent transition-colors">Overview</a></li>
+            <li><a href="/ai-labs/phi-guard" className="text-xs text-accent hover:text-accent/80 transition-colors">phi-guard →</a></li>
+            <li><a href="/ai-labs/ehr-access-watch" className="text-xs text-dim hover:text-accent transition-colors">ehr-access-watch</a></li>
+            <li><a href="/ai-labs/fhir-sentry" className="text-xs text-dim hover:text-accent transition-colors">fhir-sentry</a></li>
+            <li><a href="/ai-labs/clinic-shield" className="text-xs text-dim hover:text-accent transition-colors">clinic-shield</a></li>
+            <li><a href="/founder" className="text-xs text-dim hover:text-accent transition-colors">About the founder</a></li>
           </ul>
         </div>
 

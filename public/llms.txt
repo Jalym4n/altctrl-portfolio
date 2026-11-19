@@ -16,6 +16,11 @@ Contact: jaleed01@altctrl.run · +1-647-643-7979
 - [BitLocker Recovery](/bitlocker-recovery): Flagship in-person BitLocker recovery service for eligible Windows devices.
 - [No Fix No Fee](/no-fix-no-fee): Detailed terms of the no-fix-no-fee policy and 15% price-beat guarantee.
 - [AI Labs](/ai-labs): R&D division building HIPAA-aligned clinical AI infrastructure (private beta).
+- [phi-guard](/ai-labs/phi-guard): Open-source tool that removes patient details before text reaches AI, screens documents for prompt injection, and keeps a tamper-evident log. Runs locally.
+- [ehr-access-watch](/ai-labs/ehr-access-watch): In development. Detects inappropriate access to electronic health records with explainable rules and anomaly detection.
+- [fhir-sentry](/ai-labs/fhir-sentry): In development. Read-only security configuration auditor for FHIR health-data APIs.
+- [clinic-shield](/ai-labs/clinic-shield): Planned. Free, private security self-assessment for small clinics based on the CIS Controls.
+- [Founder](/founder): Jaleed Ahmad, founder of ALTCTRL Solutions: background, projects, and research interests.
 - [Contact](/contact): Direct phone, email, service area and response-time tiers.
 - [Get Help](/get-help): Request form for diagnosis, repair, BitLocker recovery or remote rescue.
 - [Privacy Policy](/privacy): Privacy policy for the IT Services division.
