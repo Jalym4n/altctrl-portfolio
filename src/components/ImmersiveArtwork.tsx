@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 
 const KineticScene = lazy(() => import("@/components/KineticScene"));
 
-function SecurityFallback() {
-  return <div className="sculpture-fallback" aria-hidden="true"><svg width="280" height="340" viewBox="0 0 280 340" fill="none"><path d="M140 20L255 65L240 210Q225 280 140 325Q55 280 40 210L25 65Z" className="stroke-foreground" strokeWidth="9" /><path d="M60 170H95L112 145L129 205L149 110L170 220L190 170H220" className="stroke-primary" strokeWidth="4" /></svg></div>;
+function DNAFallback() {
+  return <div className="sculpture-fallback" aria-hidden="true"><svg width="280" height="340" viewBox="0 0 280 340" fill="none"><path d="M80 20C240 70 40 120 80 170S240 270 80 320" className="stroke-foreground" strokeWidth="9" /><path d="M200 20C40 70 240 120 200 170S40 270 200 320" className="stroke-primary" strokeWidth="9" />{Array.from({ length: 15 }, (_, i) => { const y = 30 + i * 20; const offset = Math.cos((y - 20) / 150 * Math.PI) * 60; return <path key={i} d={`M${140 - offset} ${y}H${140 + offset}`} className="stroke-foreground" strokeWidth="3" opacity="0.6" />; })}</svg></div>;
 }
 
 class ArtworkBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
-  render() { return this.state.failed ? <SecurityFallback /> : this.props.children; }
+  render() { return this.state.failed ? <DNAFallback /> : this.props.children; }
 }
 
 export default function ImmersiveArtwork({ compact = false }: { compact?: boolean }) {
@@ -27,7 +27,7 @@ export default function ImmersiveArtwork({ compact = false }: { compact?: boolea
     <>
       <div className="immersive-artwork" aria-hidden="true">
         <ArtworkBoundary>
-          <Suspense fallback={<SecurityFallback />}>
+          <Suspense fallback={<DNAFallback />}>
             <KineticScene paused={paused} compact={compact} />
           </Suspense>
         </ArtworkBoundary>
