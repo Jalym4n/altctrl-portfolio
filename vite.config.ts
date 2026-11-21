@@ -13,7 +13,12 @@ export default defineConfig(({ mode }) => ({
     },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  optimizeDeps: {
+    // Preload the lazy 3D renderer so opening it does not invalidate React's dependency graph.
+    include: ["react", "react-dom/client", "react/jsx-runtime", "@react-three/fiber", "@radix-ui/react-tooltip"],
+  },
   resolve: {
+    dedupe: ["react", "react-dom"],
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
