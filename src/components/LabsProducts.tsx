@@ -20,6 +20,7 @@ type Props = {
   eyebrow?: string;
   title?: React.ReactNode;
   intro?: string;
+  hideHeading?: boolean;
 };
 
 const LabsProducts = ({
@@ -31,6 +32,7 @@ const LabsProducts = ({
     </>
   ),
   intro = "Tools that protect patient data where it is most at risk: AI prompts, record access, health-data APIs, and small-clinic IT.",
+  hideHeading = false,
 }: Props) => {
   const { ref, isVisible } = useScrollReveal();
 
@@ -38,9 +40,13 @@ const LabsProducts = ({
     <section id={id} className="px-6 md:px-20 py-20 md:py-24 relative bg-noise bg-circuit">
       <div className="absolute inset-0 glow-green pointer-events-none" />
       <div ref={ref} className={`relative max-w-7xl mx-auto ${isVisible ? "scroll-visible" : "scroll-hidden"}`}>
-        <div className="text-[14px] tracking-[4px] text-faint uppercase mb-3">{eyebrow}</div>
-        <h2 className="font-display text-[clamp(40px,5vw,60px)] text-foreground tracking-[2px] mb-4">{title}</h2>
-        <p className="text-base text-dim max-w-2xl mb-12">{intro}</p>
+        {!hideHeading && (
+          <>
+            <div className="text-[14px] tracking-[4px] text-faint uppercase mb-3">{eyebrow}</div>
+            <h2 className="font-display text-[clamp(40px,5vw,60px)] text-foreground tracking-[2px] mb-4">{title}</h2>
+            <p className="text-base text-dim max-w-2xl mb-12">{intro}</p>
+          </>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
           {labsProducts.map((p) => (
