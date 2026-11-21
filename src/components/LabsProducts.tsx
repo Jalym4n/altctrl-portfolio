@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { labsProducts, STATUS_STYLE, type LabsProduct } from "@/data/labsProducts";
-import { ArrowUpRight, ShieldCheck, ScanEye, Fingerprint, Activity } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import ProductMark from "@/components/ProductMark";
 
-const productIcons = [ShieldCheck, ScanEye, Fingerprint, Activity];
+
 
 export const StatusPill = ({ product }: { product: LabsProduct }) => {
   const style = STATUS_STYLE[product.status];
@@ -52,7 +53,6 @@ const LabsProducts = ({
 
         <div className="product-grid">
           {labsProducts.map((p, index) => {
-            const Icon = productIcons[index % productIcons.length];
             return (
             <Link
               key={p.slug}
@@ -63,7 +63,7 @@ const LabsProducts = ({
                 <span className="product-index">0{index + 1} / ALTCTRL LABS</span>
                 <StatusPill product={p} />
               </div>
-              <div className={`product-art product-art-${index}`} aria-hidden="true"><div className="product-art-orbit" /><div className="product-art-orbit second" /><Icon strokeWidth={0.8} /><span>0{index + 1}</span></div>
+              <div className={`product-art product-art-${index}`} aria-hidden="true"><div className="product-art-orbit" /><div className="product-art-orbit second" /><ProductMark slug={p.slug} /><span>0{index + 1}</span></div>
               <h3 className="product-name">
                 {p.name}
               </h3>

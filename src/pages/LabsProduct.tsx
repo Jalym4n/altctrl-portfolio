@@ -1,4 +1,8 @@
 import { useEffect } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import ProductMark from "@/components/ProductMark";
+import ProductExperience from "@/components/ProductExperience";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -41,48 +45,28 @@ const LabsProduct = () => {
   const others = labsProducts.filter((p) => p.slug !== product.slug);
 
   return (
-    <div className="bg-background min-h-screen text-foreground">
+    <div className={`lab-product-page lab-theme-${product.slug} bg-background min-h-screen text-foreground`}>
       <Navbar />
       <main className="pt-14">
-        {/* Hero */}
-        <section className="px-6 md:px-20 pt-16 md:pt-20 pb-16 relative overflow-hidden bg-noise">
-          <div className="absolute inset-0 glow-green pointer-events-none" />
-          <div className="relative max-w-5xl mx-auto">
-            <nav aria-label="Breadcrumb" className="text-[12px] tracking-[2px] uppercase text-faint mb-8">
-              <Link to="/ai-labs" className="hover:text-accent transition-colors">AI Labs</Link>
-              <span className="mx-2">/</span>
-              <span className="text-dim">{product.name}</span>
-            </nav>
-            <div className="flex flex-wrap items-center gap-4 mb-6">
-              <span className="text-5xl" aria-hidden="true">{product.icon}</span>
-              <StatusPill product={product} />
+        <section className={`lab-product-hero lab-theme-${product.slug}`}>
+          <div className="lab-page-inner relative">
+            <nav aria-label="Breadcrumb" className="lab-breadcrumb"><Link to="/ai-labs">AI Labs</Link><span>/</span><span>{product.name}</span></nav>
+            <div className="lab-product-identity"><ProductMark slug={product.slug} /><span>ALTCTRL / {product.name}</span><StatusPill product={product} /></div>
+            <div className="lab-hero-art" aria-hidden="true"><div className="lab-art-grid" /><div className="lab-art-ring" /><div className="lab-art-ring second" /><ProductMark slug={product.slug} /><div className="lab-art-sweep" /></div>
+            <div className="lab-hero-copy">
+              <div className="section-index"><span>Clinical systems / {String(labsProducts.indexOf(product) + 1).padStart(2, "0")}</span></div>
+              <h1>{product.name}</h1>
+              <p className="lab-hero-tagline">{product.tagline}</p>
+              <p className="lab-hero-summary">{product.summary}</p>
+              <div className="flex flex-wrap gap-3 mt-8">
+                <Button asChild size="lg"><Link to={product.cta.href}>{product.cta.label}<ArrowUpRight /></Link></Button>
+                {product.github && <Button asChild variant="outline" size="lg"><a href={product.github} target="_blank" rel="noreferrer">View on GitHub<ArrowUpRight /></a></Button>}
+              </div>
             </div>
-            <h1 className="font-display text-[clamp(48px,7vw,84px)] leading-[0.95] tracking-[-0.01em] text-foreground mb-5">
-              {product.name}
-            </h1>
-            <p className="text-xl md:text-2xl text-foreground leading-snug max-w-3xl mb-5">{product.tagline}</p>
-            <p className="text-base text-dim leading-relaxed max-w-3xl mb-8">{product.summary}</p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                to={product.cta.href}
-                className="font-mono text-[13px] tracking-[3px] text-primary-foreground bg-accent border border-accent px-6 py-3.5 uppercase hover:bg-transparent hover:text-accent transition-colors rounded-md"
-              >
-                → {product.cta.label}
-              </Link>
-              {product.github && (
-                <a
-                  href={product.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-mono text-[13px] tracking-[3px] text-foreground border border-border px-6 py-3.5 uppercase hover:border-accent hover:text-accent transition-colors rounded-md"
-                >
-                  View code on GitHub
-                </a>
-              )}
-            </div>
-            <p className="text-sm text-faint mt-6">For: {product.audience}</p>
+            <div className="lab-hero-foot"><span>{product.audience}</span><span>Engineered in Ontario, Canada</span></div>
           </div>
         </section>
+        <ProductExperience key={product.slug} product={product} />
 
         {/* Problem */}
         <section className="px-6 md:px-20 py-16 border-t border-border">
@@ -174,7 +158,7 @@ const LabsProduct = () => {
               <ul className="space-y-3">
                 {product.limitations.map((l) => (
                   <li key={l} className="flex gap-3 text-sm text-dim leading-relaxed">
-                    <span style={{ color: "hsl(40 90% 60%)" }} aria-hidden="true">!</span>
+                    <span className="text-accent" aria-hidden="true">!</span>
                     <span>{l}</span>
                   </li>
                 ))}
@@ -191,7 +175,7 @@ const LabsProduct = () => {
               {others.map((p) => (
                 <Link key={p.slug} to={`/ai-labs/${p.slug}`} className="bg-surface p-6 hover:bg-surface2 transition-colors group">
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-2xl" aria-hidden="true">{p.icon}</span>
+                    <ProductMark slug={p.slug} className="h-8 w-8 flex-shrink-0" />
                     <span className="font-display text-[24px] text-foreground group-hover:text-accent transition-colors">{p.name}</span>
                   </div>
                   <p className="text-sm text-dim leading-relaxed">{p.tagline}</p>

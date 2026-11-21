@@ -18,7 +18,7 @@ export default function BrandHero() {
           <Button asChild variant="link" className="text-foreground"><Link to="/get-help">Get IT support <ArrowUpRight /></Link></Button>
         </div>
       </div>
-      <div className="hero-bottomline"><a href="#divisions" aria-label="Explore ALTCTRL divisions"><ArrowDown size={18} /> Explore the practice</a><span>IT Services / Business IT / AI Labs</span><span className="hero-coordinate">43.5890° N / 79.6441° W</span></div>
+      <div className="hero-bottomline"><Link to="/it-services" aria-label="Explore ALTCTRL IT Services"><ArrowDown size={18} /> Explore the practice</Link><span>IT Services / Business IT / AI Labs</span><span className="hero-coordinate">43.5890° N / 79.6441° W</span></div>
     </section>
   );
 }

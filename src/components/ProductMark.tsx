@@ -1,0 +1,5 @@
+export default function ProductMark({ slug, className = "" }: { slug: string; className?: string }) {
+  return <svg viewBox="0 0 100 100" fill="none" className={`lab-product-mark ${className}`} aria-hidden="true" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    {slug === "phi-guard" ? <><path d="M50 8 83 21v30c0 20-19 34-33 41C36 85 17 71 17 51V21Z" /><path d="M38 71V29m12 6c27-17 27 47 0 30-27-17-27-47 0-30Z" /></> : slug === "ehr-access-watch" ? <><path d="M8 50s16-27 42-27 42 27 42 27-16 27-42 27S8 50 8 50Z" /><circle cx="50" cy="50" r="15" /><path d="M50 8v9m0 66v9M8 20l9 9m66 42 9 9M8 80l9-9m66-42 9-9" /></> : slug === "fhir-sentry" ? <><path d="m30 20-22 30 22 30m40-60 22 30-22 30M56 12 44 88" /><path d="M36 43h28v22H36zM42 43v-8a8 8 0 0 1 16 0v8" /></> : <><path d="M50 8 83 21v30c0 20-19 34-33 41C36 85 17 71 17 51V21Z" /><path d="M42 31h16v12h12v16H58v12H42V59H30V43h12Z" /></>}
+  </svg>;
+}
