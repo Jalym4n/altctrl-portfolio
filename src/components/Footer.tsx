@@ -1,71 +1,22 @@
+import { ArrowUpRight, Asterisk } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
-
-const Footer = () => {
+export default function Footer() {
+  const { ref, isVisible } = useScrollReveal(0.08);
   return (
-    <footer className="bg-background border-t border-border px-6 md:px-20 py-14 relative bg-noise">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-10 max-w-7xl mx-auto">
-        <div className="md:col-span-1">
-          <div className="flex items-center gap-2.5 mb-4">
-            
-            <span className="font-display text-2xl tracking-[2px] text-foreground">
-              ALT<span className="text-primary">CTRL</span>
-            </span>
-            <span className="text-[10px] tracking-[3px] text-faint uppercase border border-border px-2 py-0.5 rounded">Solutions</span>
-          </div>
-          <p className="text-xs text-dim leading-relaxed mb-3">Two divisions, one operator. Working IT services today, clinical AI infrastructure tomorrow.</p>
-          <span className="inline-flex items-center gap-1.5 text-[10px] tracking-[2px] uppercase border border-border px-2 py-0.5 rounded text-dim">
-            <span className="w-1.5 h-1.5 rounded-full bg-green animate-pulse-dot" />
-            Serving Mississauga &amp; the GTA
-          </span>
+    <footer className="kinetic-footer">
+      <div ref={ref} className={isVisible ? "scroll-visible" : "scroll-hidden"}>
+        <div className="section-index"><span>Let’s build something that matters.</span><Asterisk size={24} /></div>
+        <Link to="/contact" className="footer-callout">Your next move.<ArrowUpRight /></Link>
+        <div className="footer-grid">
+          <div><Link className="footer-brand" to="/">ALTCTRL</Link><p>Personal IT. Business infrastructure.<br />Clinical AI. Three tracks, one operator.</p><span className="footer-location"><span /> Serving Mississauga &amp; the GTA</span></div>
+          <div><h3>The practice</h3><Link to="/it-services">IT Services</Link><Link to="/business-it">Business IT</Link><Link to="/ai-labs">AI Labs</Link><Link to="/founder">The founder</Link></div>
+          <div><h3>Quick access</h3><Link to="/bitlocker-recovery">BitLocker recovery</Link><Link to="/data-recovery">Data recovery</Link><Link to="/no-fix-no-fee">No fix, no fee</Link><Link to="/ai-labs/phi-guard">phi-guard</Link></div>
+          <div><h3>Start a conversation</h3><a href="tel:+16476437979">+1-647-643-7979</a><a href="mailto:jaleed01@altctrl.run">jaleed01@altctrl.run</a><Link to="/get-help">Request help <ArrowUpRight size={14} /></Link></div>
         </div>
-
-        <div>
-          <div className="text-[11px] tracking-[3px] text-foreground uppercase mb-4 flex items-center gap-2">
-            IT Services
-            <span className="text-[9px] tracking-[2px] uppercase text-primary">● Live</span>
-          </div>
-          <ul className="flex flex-col gap-2.5">
-            <li><a href="/#services" className="text-xs text-dim hover:text-primary transition-colors">Services</a></li>
-            <li><a href="/bitlocker-recovery" className="text-xs text-primary hover:text-primary/80 transition-colors">BitLocker Recovery →</a></li>
-            <li><a href="/business-it" className="text-xs text-dim hover:text-primary transition-colors">Business IT (Managed)</a></li>
-            <li><a href="/data-recovery" className="text-xs text-dim hover:text-primary transition-colors">Data Recovery</a></li>
-            <li><a href="/#process" className="text-xs text-dim hover:text-primary transition-colors">Process</a></li>
-            <li><a href="/no-fix-no-fee" className="text-xs text-dim hover:text-primary transition-colors">No Fix No Fee</a></li>
-            <li><a href="/#it-faq" className="text-xs text-dim hover:text-primary transition-colors">FAQ</a></li>
-            <li><a href="/#it-contact" className="text-xs text-dim hover:text-primary transition-colors">Get help</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <div className="text-[11px] tracking-[3px] text-foreground uppercase mb-4 flex items-center gap-2">
-            AI Labs
-            <span className="text-[9px] tracking-[2px] uppercase" style={{ color: "hsl(40 90% 60%)" }}>◐ Beta</span>
-          </div>
-          <ul className="flex flex-col gap-2.5">
-            <li><a href="/ai-labs" className="text-xs text-dim hover:text-accent transition-colors">Overview</a></li>
-            <li><a href="/ai-labs/phi-guard" className="text-xs text-accent hover:text-accent/80 transition-colors">phi-guard →</a></li>
-            <li><a href="/ai-labs/ehr-access-watch" className="text-xs text-dim hover:text-accent transition-colors">ehr-access-watch</a></li>
-            <li><a href="/ai-labs/fhir-sentry" className="text-xs text-dim hover:text-accent transition-colors">fhir-sentry</a></li>
-            <li><a href="/ai-labs/clinic-shield" className="text-xs text-dim hover:text-accent transition-colors">clinic-shield</a></li>
-            <li><a href="/founder" className="text-xs text-dim hover:text-accent transition-colors">About the founder</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <div className="text-[11px] tracking-[3px] text-foreground uppercase mb-4">Contact</div>
-          <ul className="flex flex-col gap-2.5">
-            <li><a href="mailto:jaleed01@altctrl.run" className="text-xs text-dim hover:text-foreground transition-colors">jaleed01@altctrl.run</a></li>
-            <li><span className="text-xs text-dim">altctrl.run</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="border-t border-border mt-10 pt-6 text-xs tracking-[1px] text-faint text-center flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-5">
-        <span>© {new Date().getFullYear()} ALTCTRL Solutions — IT Services & AI Labs.</span>
-        <a href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</a>
+        <div className="footer-bottom"><span>© {new Date().getFullYear()} ALTCTRL Solutions</span><span>Ontario, Canada</span><Link to="/privacy">IT Services Privacy Policy <ArrowUpRight size={12} /></Link></div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

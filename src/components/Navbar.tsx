@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import GtaBadge from "@/components/GtaBadge";
-
+import { Link, useLocation } from "react-router-dom";
+import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
   const links = [
     { label: "IT Services", to: "/it-services" },
     { label: "Business IT", to: "/business-it" },
@@ -13,57 +14,21 @@ const Navbar = () => {
     { label: "Contact", to: "/contact" },
   ] as const;
 
-  const renderItem = (item: typeof links[number], onClick?: () => void) => {
-    const inner = (
-      <>
-        {item.label}
-        {"soon" in item && item.soon && (
-          <span className="text-[9px] tracking-[2px] uppercase border px-1.5 py-0.5 rounded" style={{ color: "hsl(40 90% 60%)", borderColor: "hsla(40,90%,60%,0.5)" }}>Beta</span>
-        )}
-      </>
-    );
-    const cls = "text-[12px] tracking-[2px] text-dim uppercase hover:text-foreground transition-colors flex items-center gap-2";
-    return (
-      <Link key={item.label} to={item.to} className={cls} onClick={onClick}>{inner}</Link>
-    );
-  };
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] h-14 bg-background/95 border-b border-border flex items-center justify-between px-6 md:px-12 backdrop-blur-md">
-      <Link to="/" className="flex items-center gap-2.5">
-        
-        <span className="font-display text-2xl tracking-[2px] text-foreground">
-          ALT<span className="text-primary">CTRL</span>
-        </span>
-        <span className="hidden sm:inline text-[10px] tracking-[3px] text-faint uppercase border border-border px-2 py-0.5 rounded">Solutions</span>
-        <GtaBadge className="hidden lg:inline-flex" />
-      </Link>
-
-      <div className="hidden md:flex items-center gap-6 lg:gap-8">
-        {links.map((item) => renderItem(item))}
-        <a href="tel:+16476437979" className="hidden lg:inline text-[12px] tracking-[2px] text-dim hover:text-foreground transition-colors">
-          +1-647-643-7979
-        </a>
-        <Link to="/get-help" className="text-[12px] tracking-[3px] text-foreground border border-primary px-5 py-2 uppercase hover:bg-primary hover:text-primary-foreground transition-colors rounded">
-          → Get help
-        </Link>
+    <nav className="kinetic-nav" aria-label="Main navigation">
+      <Link to="/" className="nav-wordmark" aria-label="ALTCTRL home">ALTCTRL<span className="text-primary">↗</span></Link>
+      <div className="desktop-navigation">
+        {links.map(item => <Link key={item.to} to={item.to} aria-current={location.pathname === item.to ? "page" : undefined}>{item.label}{"soon" in item && <sup>β</sup>}</Link>)}
       </div>
-
-      <div className="md:hidden flex items-center gap-3">
-        <a href="tel:+16476437979" aria-label="Call ALTCTRL" className="text-[12px] tracking-[2px] text-primary border border-primary/40 px-3 py-1.5 rounded">
-          📞 Call
-        </a>
-        <button className="text-foreground text-2xl" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? "✕" : "☰"}
-        </button>
+      <div className="nav-actions">
+        <Button asChild variant="ghost" className="nav-phone"><a href="tel:+16476437979"><Phone size={14} /><span>+1-647-643-7979</span></a></Button>
+        <Button asChild className="nav-help"><Link to="/get-help">Get help <ArrowUpRight /></Link></Button>
+        <Button variant="ghost" size="icon" className="nav-menu" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="mobile-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
       </div>
-
       {menuOpen && (
-        <div className="absolute top-14 left-0 right-0 bg-background border-b border-border flex flex-col items-center gap-5 py-6 md:hidden">
-          {links.map((item) => renderItem(item, () => setMenuOpen(false)))}
-          <Link to="/get-help" className="text-[14px] tracking-[2px] text-primary uppercase" onClick={() => setMenuOpen(false)}>
-            → Get help
-          </Link>
+        <div id="mobile-navigation" className="mobile-navigation">
+          {links.map((item, i) => <Link key={item.to} to={item.to} onClick={() => setMenuOpen(false)}><span>0{i + 1}</span>{item.label}<ArrowUpRight /></Link>)}
+          <Link to="/get-help" onClick={() => setMenuOpen(false)}>Get help <ArrowUpRight /></Link>
         </div>
       )}
     </nav>

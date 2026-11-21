@@ -27,7 +27,7 @@ export type LabsProduct = {
 
 export const STATUS_STYLE: Record<ProductStatus, { color: string; dot: string }> = {
   "open-source": { color: "hsl(var(--green))", dot: "hsl(var(--green))" },
-  "in-development": { color: "hsl(40 90% 60%)", dot: "hsl(40 90% 60%)" },
+  "in-development": { color: "hsl(var(--accent))", dot: "hsl(var(--accent))" },
   planned: { color: "hsl(var(--text-dim))", dot: "hsl(var(--text-faint))" },
 };
 

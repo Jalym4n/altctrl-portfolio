@@ -4,7 +4,7 @@ import { labsProducts, type ProductStatus } from "@/data/labsProducts";
 
 const STATUS_META: Record<ProductStatus, { label: string; color: string }> = {
   "open-source": { label: "Open source", color: "hsl(var(--green))" },
-  "in-development": { label: "In development", color: "hsl(40 90% 60%)" },
+  "in-development": { label: "In development", color: "hsl(var(--accent))" },
   planned: { label: "Planned", color: "hsl(var(--text-dim))" },
 };
 
@@ -35,25 +35,24 @@ const PortfolioHeader = ({
   }));
 
   return (
-    <section id={id} className="px-6 md:px-20 pt-20 md:pt-28 pb-2 bg-background relative">
+    <section id={id} className="portfolio-header">
       <div ref={ref} className={`relative max-w-7xl mx-auto ${isVisible ? "scroll-visible" : "scroll-hidden"}`}>
         <div className="border-t border-border pt-10">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5">
             <div>
-              <div className="text-[12px] tracking-[4px] text-faint uppercase mb-3">{eyebrow}</div>
-              <div className="font-display text-[clamp(36px,5vw,56px)] tracking-[-0.02em] text-foreground leading-[1.05]">
+              <div className="portfolio-eyebrow">{eyebrow}</div>
+              <h2 className="portfolio-title">
                 {title}
-              </div>
-              <p className="text-base text-dim mt-4 max-w-2xl">{tagline}</p>
+              </h2>
+              <p className="portfolio-intro">{tagline}</p>
             </div>
             <div className="flex-shrink-0">
               <span
-                className="inline-flex items-center gap-2.5 text-[11px] tracking-[3px] uppercase border px-4 py-2 rounded-full"
-                style={{ color: "hsl(40 90% 60%)", borderColor: "hsl(40 90% 60%)" + "66" }}
+                className="portfolio-count"
               >
                 <span
                   className="w-2 h-2 rounded-full animate-pulse-dot"
-                  style={{ background: "hsl(40 90% 60%)" }}
+                  style={{ background: "hsl(var(--accent))" }}
                 />
                 {labsProducts.length} products
               </span>

@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { labsProducts, STATUS_STYLE, type LabsProduct } from "@/data/labsProducts";
+import { ArrowUpRight, ShieldCheck, ScanEye, Fingerprint, Activity } from "lucide-react";
+
+const productIcons = [ShieldCheck, ScanEye, Fingerprint, Activity];
 
 export const StatusPill = ({ product }: { product: LabsProduct }) => {
   const style = STATUS_STYLE[product.status];
@@ -37,8 +40,7 @@ const LabsProducts = ({
   const { ref, isVisible } = useScrollReveal();
 
   return (
-    <section id={id} className="px-6 md:px-20 py-20 md:py-24 relative bg-noise bg-circuit">
-      <div className="absolute inset-0 glow-green pointer-events-none" />
+    <section id={id} className="portfolio-products">
       <div ref={ref} className={`relative max-w-7xl mx-auto ${isVisible ? "scroll-visible" : "scroll-hidden"}`}>
         {!hideHeading && (
           <>
@@ -48,32 +50,35 @@ const LabsProducts = ({
           </>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
-          {labsProducts.map((p) => (
+        <div className="product-grid">
+          {labsProducts.map((p, index) => {
+            const Icon = productIcons[index % productIcons.length];
+            return (
             <Link
               key={p.slug}
               to={`/ai-labs/${p.slug}`}
-              className="bg-surface p-8 md:p-10 group transition-colors hover:bg-surface2 flex flex-col"
+              className="product-card group"
             >
-              <div className="flex items-start justify-between gap-4 mb-5">
-                <span className="text-4xl" aria-hidden="true">{p.icon}</span>
+              <div className="product-card-top">
+                <span className="product-index">0{index + 1} / ALTCTRL LABS</span>
                 <StatusPill product={p} />
               </div>
-              <div className="font-display text-[30px] tracking-[1px] text-foreground mb-2 group-hover:text-accent transition-colors">
+              <div className={`product-art product-art-${index}`} aria-hidden="true"><div className="product-art-orbit" /><div className="product-art-orbit second" /><Icon strokeWidth={0.8} /><span>0{index + 1}</span></div>
+              <h3 className="product-name">
                 {p.name}
-              </div>
-              <p className="text-sm text-foreground mb-3">{p.tagline}</p>
-              <p className="text-sm text-dim leading-relaxed mb-6 flex-1">{p.summary}</p>
-              <div className="flex flex-wrap gap-2 mb-6">
+              </h3>
+              <p className="product-tagline">{p.tagline}</p>
+              <p className="product-summary">{p.summary}</p>
+              <div className="product-tags">
                 {p.tags.map((t) => (
-                  <span key={t} className="text-[11px] tracking-[1px] text-foreground bg-surface3 border border-border px-2.5 py-1">
+                  <span key={t}>
                     {t}
                   </span>
                 ))}
               </div>
-              <span className="text-[12px] tracking-[3px] uppercase text-accent">Learn more →</span>
+              <span className="product-link">Explore project <ArrowUpRight size={20} /></span>
             </Link>
-          ))}
+          ); })}
         </div>
       </div>
     </section>
