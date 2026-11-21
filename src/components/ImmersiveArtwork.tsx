@@ -4,10 +4,14 @@ import { Button } from "@/components/ui/button";
 
 const KineticScene = lazy(() => import("@/components/KineticScene"));
 
+function SecurityFallback() {
+  return <div className="sculpture-fallback" aria-hidden="true"><svg width="280" height="340" viewBox="0 0 280 340" fill="none"><path d="M140 20L255 65L240 210Q225 280 140 325Q55 280 40 210L25 65Z" className="stroke-foreground" strokeWidth="9" /><path d="M60 170H95L112 145L129 205L149 110L170 220L190 170H220" className="stroke-primary" strokeWidth="4" /></svg></div>;
+}
+
 class ArtworkBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() { return { failed: true }; }
-  render() { return this.state.failed ? <div className="sculpture-fallback" aria-hidden="true"><span /><span /><span /></div> : this.props.children; }
+  render() { return this.state.failed ? <SecurityFallback /> : this.props.children; }
 }
 
 export default function ImmersiveArtwork({ compact = false }: { compact?: boolean }) {
@@ -23,7 +27,7 @@ export default function ImmersiveArtwork({ compact = false }: { compact?: boolea
     <>
       <div className="immersive-artwork" aria-hidden="true">
         <ArtworkBoundary>
-          <Suspense fallback={<div className="sculpture-fallback"><span /><span /><span /></div>}>
+          <Suspense fallback={<SecurityFallback />}>
             <KineticScene paused={paused} compact={compact} />
           </Suspense>
         </ArtworkBoundary>
